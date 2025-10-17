@@ -7,4 +7,5 @@ dependencies = [
     "dishka>=1.7.2",
     "fastapi>=0.119.0",
     "sqlalchemy>=2.0.44",
+    "uvicorn>=0.37.0",
 ]

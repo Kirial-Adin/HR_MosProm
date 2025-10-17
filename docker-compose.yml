@@ -1,0 +1,47 @@
+services:
+  #redis:
+  #  image: redis:7.2.4-alpine
+  #  env_file:
+  #    - .env
+  #  restart: on-failure
+  #  command: redis-server /usr/local/etc/redis/redis.conf
+  #  volumes:
+  #    - redis:/data
+  #    - ./buildfiles/redis.conf:/usr/local/etc/redis/redis.conf:ro
+
+  nats:
+    image: nats
+    entrypoint: /nats-server
+    command: "-js -m 5555"
+    ports:
+      - "4222:4222"
+      - "5555:5555"
+    volumes:
+      - "js:/tmp/nats/jetstream"
+
+  mos_prom_api:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    env_file:
+      - back-end/.env
+    restart: always
+    command: 'uv run uvicorn src.main:app --host 0.0.0.0 --port 8000'
+    ports:
+      - "8000:8000"
+    depends_on:
+      nats:
+        condition: service_started
+      #redis:
+      #  condition: service_started
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10GB"
+        max-file: "3"
+
+
+volumes:
+  js:
+  redis:

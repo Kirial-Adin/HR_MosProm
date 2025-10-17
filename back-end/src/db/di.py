@@ -3,8 +3,8 @@ from collections.abc import AsyncIterable
 from dishka import Provider, Scope, provide
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
-from configuration import Configuration
-from db.database import Database, create_async_engine
+from src.configuration import Configuration
+from src.db.database import Database, create_async_engine
 
 
 class DatabaseProvider(Provider):
