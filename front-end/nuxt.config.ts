@@ -1,12 +1,8 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
-  css: [
-    // Глобальные CSS/SCSS файлы
-    "~/assets/styles/global.scss",
-  ],
+  css: ["~/assets/styles/global.scss"],
 
   modules: [
     "@nuxt/eslint",
