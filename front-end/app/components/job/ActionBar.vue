@@ -2,12 +2,14 @@
 
 <template>
   <div class="action-bar-container">
-    <img class="container__icon" src="./icons/Tag.svg" alt="" />
+    <img class="container__icon" src="/svg/Tag.svg" alt="" />
     <p class="container__text"><slot></slot></p>
   </div>
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/styles/variables" as var;
+
 .action-bar-container {
   display: flex;
   align-items: center;
@@ -26,6 +28,7 @@
 }
 
 .container__text {
+  color: var.$text-active;
   font-size: 9px;
 }
 </style>

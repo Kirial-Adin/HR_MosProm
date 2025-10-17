@@ -1,28 +1,35 @@
 // Colors
-$bg-primary: #19191B;
+$bg-primary: #ededed;
 $bg-secondary: #232328;
-$bg-tertiary: #29292B;
-$bg-card: #3D3D3D;
-$bg-input: #151517;
+$bg-tertiary: #d0d0d0;
+$bg-card: #cecece;
+$bg-input: #d6d6d6;
 
-$border-color: #3D3D3D;
-$border-secondary: #5D5C5C;
+$border-color: #3d3d3d;
+$border-secondary: #5d5c5c;
 
-$text-primary: #D5D5D5;
-$text-secondary: #E1E1E3;
+$text-primary: #727272;
+$text-active: #d6d6d6;
+$text-secondary: #181818;
 $text-muted: #727272;
-$text-description: #B3B3B3;
-$text-timestamp: #3C3D43;
-$text-white: #FFF;
+$text-description: #202020;
+$text-timestamp: #3c3d43;
+$text-timestamp-white: #d6d6d6;
+$text-black: #202020;
+$text-white: #d6d6d6;
+
+$indicator: #e06565;
 
 // Gradients
-$gradient-button: linear-gradient(150deg, #3C3D43 1.62%, #232328 70.36%);
-$gradient-overlay: linear-gradient(0deg, #232328 0%, rgba(35, 35, 40, 0.00) 100%);
+$gradient-button: linear-gradient(150deg, #3c3d43 1.62%, #232328 70.36%);
+$gradient-overlay: linear-gradient(0deg, #232328 0%, rgba(35, 35, 40, 0) 100%);
 
 // Shadows
 $shadow-inset: 0 3px 4.4px 0 rgba(0, 0, 0, 0.23) inset;
-$shadow-glow: 0 0 130.637px 0 #FFF, 0 0 74.65px 0 #FFF, 0 0 43.546px 0 #FFF, 
-              0 0 21.773px 0 #FFF, 0 0 6.221px 0 #FFF, 0 0 3.11px 0 #FFF;
+// $shadow-glow: 0 0 130.637px 0 #fff, 0 0 74.65px 0 #fff, 0 0 43.546px 0 #fff,
+//   0 0 21.773px 0 #fff, 0 0 6.221px 0 #fff, 0 0 3.11px 0 #fff;
+$shadow-glow: 0 0 3px 0 #f00, 0 0 6px 0 #f00, 0 0 22px 0 #f00, 0 0 44px 0 #f00,
+  0 0 75px 0 #f00, 0 0 131px 0 #f00;
 
 // Spacing
 $sidebar-width: 308px;
@@ -34,4 +41,4 @@ $radius-md: 10px;
 $radius-lg: 23px;
 
 // Font
-$font-family: 'Roboto', -apple-system, Helvetica, sans-serif;
+$font-family: "Roboto", -apple-system, Helvetica, sans-serif;

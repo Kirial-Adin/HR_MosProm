@@ -1,4 +1,4 @@
-@import './variables.scss';
+@use "~/assets/styles/variables" as var;
 
 * {
   margin: 0;
@@ -7,9 +7,9 @@
 }
 
 body {
-  font-family: $font-family;
-  background-color: $bg-primary;
-  color: $text-primary;
+  font-family: var.$font-family;
+  background-color: var.$bg-primary;
+  color: var.$text-primary;
   overflow-x: hidden;
 }
 
@@ -18,26 +18,24 @@ body {
   position: relative;
 }
 
-// Scrollbar styling
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: $bg-secondary;
+  background: var.$bg-secondary;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $bg-card;
+  background: var.$bg-card;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $border-secondary;
+  background: var.$border-secondary;
 }
 
-// Utility classes
 .container {
   max-width: 1920px;
   margin: 0 auto;

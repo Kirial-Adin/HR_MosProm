@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <JobAppSidebar />
+    <SidebarAppSidebar />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
