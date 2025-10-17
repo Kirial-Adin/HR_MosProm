@@ -202,6 +202,7 @@ const jobs = ref<Job[]>([
 
 <template>
   <div class="home-page">
+    <SidebarAppSidebar />
     <div class="content-wrapper">
       <div class="header-section">
         <h1 class="page-title">Все стажировки</h1>
