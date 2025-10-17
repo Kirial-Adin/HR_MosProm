@@ -1,0 +1,37 @@
+// Colors
+$bg-primary: #19191B;
+$bg-secondary: #232328;
+$bg-tertiary: #29292B;
+$bg-card: #3D3D3D;
+$bg-input: #151517;
+
+$border-color: #3D3D3D;
+$border-secondary: #5D5C5C;
+
+$text-primary: #D5D5D5;
+$text-secondary: #E1E1E3;
+$text-muted: #727272;
+$text-description: #B3B3B3;
+$text-timestamp: #3C3D43;
+$text-white: #FFF;
+
+// Gradients
+$gradient-button: linear-gradient(150deg, #3C3D43 1.62%, #232328 70.36%);
+$gradient-overlay: linear-gradient(0deg, #232328 0%, rgba(35, 35, 40, 0.00) 100%);
+
+// Shadows
+$shadow-inset: 0 3px 4.4px 0 rgba(0, 0, 0, 0.23) inset;
+$shadow-glow: 0 0 130.637px 0 #FFF, 0 0 74.65px 0 #FFF, 0 0 43.546px 0 #FFF, 
+              0 0 21.773px 0 #FFF, 0 0 6.221px 0 #FFF, 0 0 3.11px 0 #FFF;
+
+// Spacing
+$sidebar-width: 308px;
+$content-offset: 413px;
+
+// Border radius
+$radius-sm: 5px;
+$radius-md: 10px;
+$radius-lg: 23px;
+
+// Font
+$font-family: 'Roboto', -apple-system, Helvetica, sans-serif;
