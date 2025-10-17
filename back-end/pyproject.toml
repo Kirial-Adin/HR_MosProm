@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Backend for MosProm HR platform"
 requires-python = ">=3.12"
 dependencies = [
+    "dishka>=1.7.2",
     "fastapi>=0.119.0",
     "sqlalchemy>=2.0.44",
 ]
