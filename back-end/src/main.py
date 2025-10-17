@@ -1,8 +1,27 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
+from dishka import make_async_container
+from dishka.integrations.fastapi import setup_dishka
 
-app = FastAPI()
+from src.di import (
+    DatabaseProvider,
+    ConfigurationProvider,
+    InfrastructureProvider,
+)
 
-@app.get(path="/ping")
-async def ping():
-    return "123"
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    await app.state.dishka_container.close()
+
+
+container = make_async_container(
+    DatabaseProvider(),
+    ConfigurationProvider(),
+    InfrastructureProvider(),
+)
+
+app = FastAPI(lifespan=lifespan)
+setup_dishka(container=container, app=app)

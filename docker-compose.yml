@@ -1,13 +1,25 @@
 services:
-  #redis:
-  #  image: redis:7.2.4-alpine
-  #  env_file:
-  #    - .env
-  #  restart: on-failure
-  #  command: redis-server /usr/local/etc/redis/redis.conf
-  #  volumes:
-  #    - redis:/data
-  #    - ./buildfiles/redis.conf:/usr/local/etc/redis/redis.conf:ro
+  redis:
+    image: redis:7.2.4-alpine
+    restart: on-failure
+    env_file:
+      - back-end/.env
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis:/data
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:15-alpine
+    env_file:
+      - back-end/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: on-failure
+    ports:
+      - "5432:5432"
 
   nats:
     image: nats
@@ -20,9 +32,7 @@ services:
       - "js:/tmp/nats/jetstream"
 
   mos_prom_api:
-    build:
-      context: ./back-end
-      dockerfile: Dockerfile
+    image: mos_prom_api:latest
     env_file:
       - back-end/.env
     restart: always
@@ -32,8 +42,10 @@ services:
     depends_on:
       nats:
         condition: service_started
-      #redis:
-      #  condition: service_started
+      redis:
+        condition: service_started
+      migrations:
+        condition: service_completed_successfully
 
     logging:
       driver: "json-file"
@@ -41,7 +53,16 @@ services:
         max-size: "10GB"
         max-file: "3"
 
+  migrations:
+    image: mos_prom_api:latest
+    env_file:
+      - back-end/.env
+    restart: no
+    command: 'uv run alembic upgrade head'
+    depends_on:
+      - db
 
 volumes:
+  pgdata:
   js:
   redis:
