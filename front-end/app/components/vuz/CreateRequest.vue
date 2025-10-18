@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import AppSidebar from "../sidebar/AppSidebar.vue";
+import cities from "~/components/json/russian-cities.json";
 
 const add = ref(false);
-const cities = ["Moscow", "Vladimir", "Krasnodar"];
+
+const cityNames = cities.map((city) => city.name);
 
 const changeAdding = () => {
   add.value = !add.value;
@@ -150,7 +152,7 @@ const changeAdding = () => {
                 <UiDropdown
                   class="select-input city"
                   placeholder="Начните вводить…"
-                  :options="cities"
+                  :options="cityNames"
                   :styles="'height: 54px'"
                 />
               </div>
@@ -161,19 +163,20 @@ const changeAdding = () => {
                   <label>Телефон</label>
                   <div class="phone-input">
                     <span>+7</span>
-                    <div class="divider-vertical"></div>
+                    <div class="divider-vertical" />
+                    <input class="input-number" type="number" required />
                   </div>
                 </div>
               </div>
               <div class="contacts-row">
                 <div class="form-group">
                   <label>Почта ВУЗа</label>
-                  <div class="text-input"></div>
+                  <input class="text-input" type="email" required />
                 </div>
               </div>
               <div class="form-group">
                 <label>Telegram представителя вуза</label>
-                <div class="text-input"></div>
+                <input class="text-input" required type="text" />
               </div>
             </div>
 
@@ -195,6 +198,7 @@ const changeAdding = () => {
 
               <div class="checkboxes">
                 <label class="checkbox-label">
+                  <input type="checkbox" class="checkbox-input" />
                   <div class="checkbox"></div>
                   <span
                     >Студенты предоставили согласие на обработку своих
@@ -203,6 +207,7 @@ const changeAdding = () => {
                 </label>
 
                 <label class="checkbox-label">
+                  <input type="checkbox" class="checkbox-input" />
                   <div class="checkbox"></div>
                   <span
                     >Я (представитель ВУЗа) даю согласие на обработку данных о
@@ -534,6 +539,8 @@ const changeAdding = () => {
 }
 
 .right-section {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-row {
@@ -577,6 +584,10 @@ const changeAdding = () => {
   align-items: center;
   padding: 15px 18px;
   gap: 10px;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  font-weight: 400;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -603,6 +614,21 @@ const changeAdding = () => {
     width: 1px;
     height: 28px;
     background: #000;
+  }
+
+  .input-number {
+    width: 310px;
+    height: 40px;
+    border: none;
+    background: #d7d7d7;
+    padding: 5px;
+    font-size: 20px;
+    outline: none;
+    appearance: none;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
   }
 }
 
@@ -713,13 +739,49 @@ const changeAdding = () => {
     align-items: center;
     gap: 9px;
     cursor: pointer;
+    position: relative;
+
+    // Скрываем настоящий input
+    .checkbox-input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+
+      // Стили для checked состояния
+      &:checked + .checkbox {
+        background: #e06565; // Зеленый цвет при выборе
+        border-color: #e06565;
+
+        // Добавляем галочку
+        &::after {
+          content: "";
+          position: absolute;
+          left: 6px;
+          top: 2px;
+          width: 4px;
+          height: 8px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+      }
+
+      // Стили при фокусе (для доступности)
+      &:focus + .checkbox {
+        box-shadow: 0 0 0 2px rgba(182, 46, 46, 0.3);
+      }
+    }
 
     .checkbox {
       width: 20px;
       height: 20px;
       border-radius: 50%;
       background: #dcdcdc;
+      border: 2px solid #ccc;
       flex-shrink: 0;
+      position: relative;
+      transition: all 0.3s ease;
     }
 
     span {
@@ -727,10 +789,16 @@ const changeAdding = () => {
       font-family: "Roboto", sans-serif;
       font-size: 13px;
       font-weight: 400;
+      transition: color 0.3s ease;
 
       @media (max-width: 768px) {
         font-size: 12px;
       }
+    }
+
+    // Меняем цвет текста при выборе
+    .checkbox-input:checked ~ span {
+      color: #333; // Более темный цвет для выбранного элемента
     }
   }
 }

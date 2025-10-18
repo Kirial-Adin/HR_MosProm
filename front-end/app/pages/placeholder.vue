@@ -1,5 +1,6 @@
 <template>
   <div class="placeholder-page">
+    <SidebarAppSidebar></SidebarAppSidebar>
     <div class="content-wrapper">
       <div class="placeholder-content">
         <svg
@@ -28,7 +29,9 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { SidebarAppSidebar } from "#components";
+</script>
 
 <style scoped lang="scss">
 @import "@/assets/styles/variables.scss";

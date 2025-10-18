@@ -10,17 +10,6 @@ import UiDropdown from "~/components/ui/UiDropdown.vue";
     <form action="">
       <h1 class="auth-title">Создание аккаунта</h1>
       <div class="field">
-        <label for="name">* Имя</label>
-        <input id="name" class="input-container name" type="text" required />
-        <label for="secondaname">* Фамилия</label>
-        <input
-          id="secondaname"
-          class="input-container secondaname"
-          type="text"
-          required
-        />
-        <label for="lastname">Отчество</label>
-        <input id="lastname" class="input-container lastname" type="text" />
         <label for="vuzi">* Выберите ВУЗ</label>
         <UiDropdown
           class="vuzi"
