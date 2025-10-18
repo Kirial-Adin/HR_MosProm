@@ -104,6 +104,8 @@
       </nuxt-link>
     </nav>
 
+    <slot></slot>
+
     <div class="footer-link">
       <a href="#">Terms of use</a>
     </div>
@@ -117,7 +119,6 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: var.$sidebar-width;
   height: 100vh;
   padding: 60px 30px 45px;
   display: flex;
@@ -126,7 +127,7 @@
 }
 
 .profile-section {
-  margin-bottom: 89px;
+  margin-bottom: 30px;
 }
 
 .profile-button {
