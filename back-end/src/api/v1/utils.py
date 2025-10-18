@@ -4,7 +4,7 @@ from argon2.exceptions import VerifyMismatchError
 
 ph = PasswordHasher()
 
-def create_access_token(user_id: int, user_session_id: int, secret_key: str) -> str:
+def create_access_token(user_id: int, user_session_id: str, secret_key: str) -> str:
     to_encode = {
         "sub": str(user_id),  # jwt lib bug: sub must be str, if not:
                               # on token validation lib raises jwt.InvalidTokenError

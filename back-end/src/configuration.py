@@ -51,19 +51,6 @@ class NATSConfig:
 
     nats_uri: str = getenv("NATS_URI", "nats://nats:4222")
 
-@dataclass
-class SpammerConfig:
-    """Spammer configuration."""
-
-    allow_spam_images: bool = bool(getenv("ALLOW_SPAM_IMAGES", False))
-    allow_smart_spam: bool = bool(getenv("ALLOW_SMART_SPAM", False))
-
-
-@dataclass
-class BotConfig:
-    """Bot configuration."""
-    token: str = getenv("BOT_TOKEN")
-
 
 @dataclass
 class Configuration:
@@ -71,8 +58,7 @@ class Configuration:
 
     debug = bool(getenv("DEBUG"))
     logging_level = int(getenv("LOGGING_LEVEL", logging.INFO))
+    secret_jwt = getenv("JWT_SECRET")
 
     db = DatabaseConfig()
     redis = RedisConfig()
-    bot = BotConfig()
-    spammer = SpammerConfig()

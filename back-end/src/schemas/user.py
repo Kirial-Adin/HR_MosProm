@@ -1,4 +1,5 @@
 import re
+import enum
 from typing import Annotated
 
 from pydantic import (
@@ -15,6 +16,10 @@ display_name_annotation = Annotated[str, Field(min_length=1, max_length=64, desc
 telephone_number_annotation = Annotated[str, Field(min_length=1, max_length=32, description="user's telephone number")]
 avatar_url_annotation = Annotated[AnyUrl, Field(description="user's avatar url")]
 
+class RoleEnum(enum.Enum):
+    COMPANY_OWNER = "company_owner"
+    UNIVERSITY_ADMIN = "university_admin"
+
 class SingUp(BaseModel):
 
     """Data required for SingUp (registration)."""
@@ -22,6 +27,7 @@ class SingUp(BaseModel):
     model_config = ConfigDict(regex_engine="python-re")
     email: email_annotation
     password: password_annotation
+    role: RoleEnum
 
 class TokenAnswer(BaseModel):
 
@@ -34,11 +40,11 @@ class LogIn(BaseModel):
     """Data required for LogIn.
 
     Attributes:
-        login_data: must be email or username
+        email: email string
 
     """
 
-    login_data: email_annotation
+    email: email_annotation
     password: password_annotation
 
 class UserInfoAnswer(BaseModel):
@@ -46,7 +52,6 @@ class UserInfoAnswer(BaseModel):
     """Answer for non sensitivity user info."""
 
     email: email_annotation
-    avatar_url: avatar_url_annotation | None
 
 class UserInfoUpdate(BaseModel):
 
