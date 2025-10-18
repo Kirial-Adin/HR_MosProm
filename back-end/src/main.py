@@ -10,6 +10,8 @@ from src.di import (
     InfrastructureProvider,
 )
 
+from src.api import router
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -24,4 +26,5 @@ container = make_async_container(
 )
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(router)
 setup_dishka(container=container, app=app)

@@ -35,6 +35,7 @@ class VacancyRepo(BaseRepo[Vacancy]):
                 specialty=specialty,
             )
         )
+        await self.session.commit()
 
     async def list_by_company(self, company_id: int) -> Sequence[Vacancy]:
         result = await self.session.execute(

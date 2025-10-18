@@ -22,6 +22,7 @@ class ContactsRepo(BaseRepo[Contacts]):
         other: Optional[str] = None,
     ) -> None:
         await self.session.merge(Contacts(phone=phone, email=email, other=other))
+        await self.session.commit()
 
     async def update_fields(
         self,

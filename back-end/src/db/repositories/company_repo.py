@@ -33,6 +33,7 @@ class CompanyRepo(BaseRepo[Company]):
                 contacts_fk=contacts_fk,
             )
         )
+        await self.session.commit()
 
     async def get_by_name(self, name: str) -> Optional[Company]:
         return await self.session.scalar(select(Company).where(Company.name == name).limit(1))

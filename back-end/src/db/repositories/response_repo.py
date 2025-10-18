@@ -37,6 +37,7 @@ class ResponseRepo(BaseRepo[Response]):
                 status=status,
             )
         )
+        await self.session.commit()
 
     async def list_by_vacancy(self, vacancy_id: int) -> Sequence[Response]:
         result = await self.session.execute(

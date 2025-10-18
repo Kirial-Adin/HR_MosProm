@@ -31,6 +31,7 @@ class UniversityRequestRepo(BaseRepo[UniversityRequest]):
                 period=period,
             )
         )
+        await self.session.commit()
 
     async def list_by_university(self, university_id: int) -> Sequence[UniversityRequest]:
         result = await self.session.execute(

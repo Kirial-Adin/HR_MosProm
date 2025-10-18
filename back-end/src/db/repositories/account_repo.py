@@ -22,6 +22,7 @@ class AccountRepo(BaseRepo[Account]):
         role: RoleEnum
     ) -> None:
         await self.session.merge(Account(email=email, password=password, role=role))
+        await self.session.commit()
 
     async def get_by_email(self, email: str) -> Optional[Account]:
         return await self.session.scalar(select(Account).where(Account.email == email).limit(1))

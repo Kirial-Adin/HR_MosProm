@@ -1,15 +1,24 @@
 services:
   redis:
     image: redis:7.2.4-alpine
-    restart: on-failure
+    restart: unless-stopped
     env_file:
       - back-end/.env
-    command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - ./buildfiles/redis.conf:/usr/local/etc/redis/redis.conf:ro
       - redis:/data
     ports:
       - "6379:6379"
+    command: >
+      sh -lc '
+        # проверим, что переменная точно есть
+        if [ -z "$${REDIS_PASSWORD}" ]; then
+          echo "ERROR: REDIS_PASSWORD is empty or not set" >&2
+          exit 1
+        fi
+        printf "requirepass %s\n" "$${REDIS_PASSWORD}" > /usr/local/etc/redis/override.conf
+        exec redis-server /usr/local/etc/redis/redis.conf --include /usr/local/etc/redis/override.conf
+      '
 
   db:
     image: postgres:15-alpine

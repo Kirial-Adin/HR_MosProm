@@ -35,7 +35,7 @@ async def get_account_from_token(
     if not user_session:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
-    return await database.account.get_by_id(obj_id=user_session["sub"])
+    return await database.account.get_by_id(obj_id=payload["sub"])
 
 account_annotated = Annotated[models.Account, Depends(get_account_from_token)]
 
@@ -84,8 +84,7 @@ async def login(
     config: FromDishka[Configuration],
     login_payload: user.LogIn,
 ) -> user.TokenAnswer:
-    validate_email(login_payload.login_data)
-    user_account = await database.account.get_by_email(login_payload.login_data)
+    user_account = await database.account.get_by_email(login_payload.email)
 
     if not user_account:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
@@ -105,6 +104,7 @@ async def login(
     description="Kill current session and make token invalid. Don't affect others sessions and tokens.",
     responses=error_responses.unauthorized,
 )
+@inject
 async def logout(
     redis: FromDishka[Redis],
     config: FromDishka[Configuration],

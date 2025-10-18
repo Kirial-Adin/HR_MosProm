@@ -25,6 +25,7 @@ class UniversityRepo(BaseRepo[University]):
         await self.session.merge(
             University(name=name, admin_fk=admin_fk, contacts_fk=contacts_fk)
         )
+        await self.session.commit()
 
     async def get_by_name(self, name: str) -> Optional[University]:
         return await self.session.scalar(select(University).where(University.name == name).limit(1))
